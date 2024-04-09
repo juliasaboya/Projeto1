@@ -12,6 +12,8 @@ public class Interface extends JFrame {
     public final int maxCars = 10;
     private Timer timer;
     final int sizeX = 1200, sizeY = 1000;
+    public int[] identifierVerification;
+    int i;
 
     public Interface() {
         setTitle("Car Simulation");
@@ -24,8 +26,10 @@ public class Interface extends JFrame {
         JButton leftButton = new JButton("Criar Carro Esquerda");
         JButton rightButton = new JButton("Criar Carro Direita");
 
-        JTextField identifierField = new JTextField(5);
+        JTextField idField = new JTextField(5);
         JTextField crossingTimeField = new JTextField(5);
+        JTextField waitingTimeField = new JTextField(5);
+
 
         logTextArea = new JTextArea(8,20);
         logTextArea.setEditable(false);
@@ -35,21 +39,23 @@ public class Interface extends JFrame {
             CarManager manage = new CarManager(roadPanel, leftCars, rightCars);
             @Override
             public void actionPerformed(ActionEvent e) {
-                int identifier = Integer.parseInt(identifierField.getText());
+                int id = Integer.parseInt(idField.getText());
                 int crossingTime = Integer.parseInt(crossingTimeField.getText());
-                manage.createCar(true, identifier, crossingTime);
-                addToLog("Carro "+identifier+" criado a esquerda");
+                int waitingTime = Integer.parseInt(waitingTimeField.getText());
+                manage.createCar(true, id, crossingTime, waitingTime);  
             }
-        });
+        }
+        );
         
         rightButton.addActionListener(new ActionListener() {
             CarManager manage = new CarManager(roadPanel, leftCars, rightCars);
             @Override
             public void actionPerformed(ActionEvent e) {
-                int identifier = Integer.parseInt(identifierField.getText());
+                int id = Integer.parseInt(idField.getText());
                 int crossingTime = Integer.parseInt(crossingTimeField.getText());
-                manage.createCar(false, identifier, crossingTime);
-                addToLog("Carro "+identifier+" criado a direita");
+                int waitingTime = Integer.parseInt(waitingTimeField.getText());
+                manage.createCar(false, id, crossingTime, waitingTime);
+                addToLog("Carro "+id+" criado a direita");
 
             }
         });
@@ -58,9 +64,11 @@ public class Interface extends JFrame {
         buttonPanel.add(rightButton);
 
         buttonPanel.add(new JLabel("No Identificador:"));
-        buttonPanel.add(identifierField);
+        buttonPanel.add(idField);
         buttonPanel.add(new JLabel("Tempo Travessia (s):"));
         buttonPanel.add(crossingTimeField);
+        buttonPanel.add(new JLabel("Tempo Espera (s):"));
+        buttonPanel.add(waitingTimeField);
 
         buttonPanel.add(scrollPane);
 
@@ -89,3 +97,4 @@ public class Interface extends JFrame {
         logTextArea.append(message + "\n");
     }
 }
+
