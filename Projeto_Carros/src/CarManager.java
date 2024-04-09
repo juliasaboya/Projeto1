@@ -18,10 +18,10 @@ public class CarManager {
         this.rightCars = rightCars;
     }
 
-    public void createCar(boolean left, int identifier, int crossingTime) {
+    public void createCar(boolean left, int identifier, int crossingTime, int waitingTime) {
         if (left) {
             if (leftCars.size() < maxCars) {
-                Car newCar = new Car(leftCarX, leftCarY, true, identifier, crossingTime, instance);
+                Car newCar = new Car(leftCarX, leftCarY, identifier, crossingTime, waitingTime, instance, true);
                 leftCars.add(newCar);
                 roadPanel.repaint();
             } else {
@@ -29,7 +29,7 @@ public class CarManager {
             }
         } else {
             if (rightCars.size() < maxCars) {
-                Car newCar = new Car(rightCarX, rightCarY, false, identifier, crossingTime,instance);
+                Car newCar = new Car(rightCarX, rightCarY, identifier, crossingTime, waitingTime, instance, false);
                 rightCars.add(newCar);
                 roadPanel.repaint();
             } else {
@@ -48,5 +48,6 @@ public class CarManager {
         roadPanel.repaint();
     }
 }
+
 
 
