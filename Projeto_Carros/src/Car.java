@@ -11,15 +11,18 @@ public class Car {
     private final int speed = 5;
     private int identifier;
     private int crossingTime;
+    private int waitingTime;
     private Interface instance;
 
-    public Car(int x, int y, boolean isLeft, int identifier, int crossingTime, Interface instance) {
+    public Car(int x, int y, int identifier, int crossingTime, int waitingTime, Interface instance, boolean isLeft) {
         this.x = x;
         this.y = y;
         this.isLeft = isLeft;
         this.identifier = identifier;
         this.crossingTime = crossingTime;
+        this.waitingTime = waitingTime;
         this.instance = instance;
+
         
 
         try {
@@ -80,5 +83,4 @@ public class Car {
         g.drawString("Carro " + identifier + " - " + crossingTime + "s", x, y - 10);
     }
 }
-
 
