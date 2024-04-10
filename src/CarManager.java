@@ -6,14 +6,15 @@ import java.util.Set;
 public class CarManager {
     private Set<Integer> usedIds = new HashSet<>();
     private RoadPanel roadPanel;
+    public JTextArea logTextArea;
     private ArrayList<Car> leftCars;
     private ArrayList<Car> rightCars;
-    private boolean isBridgeOccupied = false; 
     private final int maxCars = 10;
     public final int leftCarX = 2;
     public int rightCarX = 1080;
     public int leftCarY = 300;
     public int rightCarY = 410;
+    
     
 
     public CarManager(RoadPanel roadPanel, ArrayList<Car> leftCars, ArrayList<Car> rightCars) {
@@ -23,12 +24,16 @@ public class CarManager {
     }
 
     public void createCar(boolean left, int id, int crossingTime, int waitingTime) {
+        final Interface method = new Interface();
         String idLabel = left ? id + "A" : id + "B";
+        String sideString = left ? "esquerda" : "direita";
+
         if (!usedIds.contains(id)){
             if (left) {
                 if (leftCars.size() < maxCars) {
                     Car newCar = new Car(leftCarX, leftCarY, idLabel, crossingTime, waitingTime, true);
                     leftCars.add(newCar);
+                    method.addToLog("Carro "+idLabel+" criado a "+sideString);
                     usedIds.add(id);
                     roadPanel.repaint();
                 } else {
@@ -38,6 +43,7 @@ public class CarManager {
                 if (rightCars.size() < maxCars) {
                     Car newCar = new Car(rightCarX, rightCarY, idLabel, crossingTime, waitingTime, false);
                     rightCars.add(newCar);
+                    method.addToLog("Carro "+idLabel+" criado a "+sideString);
                     usedIds.add(id);
                     roadPanel.repaint();
                 } else {

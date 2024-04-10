@@ -13,6 +13,7 @@ public class Car {
     private int crossingTime;
     @SuppressWarnings("unused")
     private int waitingTime;
+   
     
 
     public Car(int x, int y, String identifier, int crossingTime, int waitingTime, boolean isLeft) {
@@ -35,7 +36,8 @@ public class Car {
     }
 
     public void move() {
-        Interface debug = new Interface();
+        final Interface method = new Interface();
+
         if (isLeft) {
             x += speed;
             if (x > 1200) {
@@ -51,7 +53,7 @@ public class Car {
                 
                 if (x==350){
                     System.out.println("Carro " + identifier + " passando pela ponte!");
-                    debug.addToLog("Carro " + identifier + " passando pela ponte!");
+                    method.addToLog("Carro " + identifier + " passando pela ponte!");
                 }
             }
         } else {
@@ -69,10 +71,16 @@ public class Car {
                 
                 if (x==799){
                     System.out.println("Carro " + identifier + " passando pela ponte!");
-                    debug.addToLog("Carro " + identifier + " passando pela ponte!");
+                    method.addToLog("Carro " + identifier + " passando pela ponte!");
                 }
             }
         }
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
     }
 
     public void draw(Graphics g) {
