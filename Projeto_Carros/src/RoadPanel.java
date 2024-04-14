@@ -27,6 +27,7 @@ public class RoadPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         backGround(g);
+        drawClouds(g);
         drawBorder(g, 295);
         drawBigRoad(g);
         drawBorder(g, 500);
@@ -86,5 +87,33 @@ public class RoadPanel extends JPanel {
         Color roadColor = new Color(36,35,36);
         g.setColor(roadColor);
         g.fillRect(getWidth()/3, 350, getWidth() /3, 100);
+    }
+    private void drawClouds(Graphics g) {
+        // Definindo a cor das nuvens
+        Color cloudColor = new Color(255, 255, 255);
+
+        // Definindo o número de nuvens e suas posições
+        int numClouds = 3;
+        int[] cloudX = {50, 200, 400}; // Posições X das nuvens
+        int[] cloudY = {100, 50, 150}; // Posições Y das nuvens
+
+        // Desenhando cada nuvem
+        for (int i = 0; i < numClouds; i++) {
+            drawSingleCloud(g, cloudX[i], cloudY[i], cloudColor);
+        }
+    }
+
+    // Função auxiliar para desenhar uma única nuvem
+    private void drawSingleCloud(Graphics g, int x, int y, Color color) {
+        g.setColor(color);
+
+        // Desenhando a forma da nuvem
+        int[] xPoints = {x, x + 20, x + 40, x + 60, x + 80, x + 100};
+        int[] yPoints = {y + 40, y + 20, y + 40, y + 20, y + 40, y + 20};
+        int numPoints = xPoints.length;
+
+        // Desenhando a forma poligonal da nuvem
+        Polygon cloud = new Polygon(xPoints, yPoints, numPoints);
+        g.fillPolygon(cloud);
     }
 }
