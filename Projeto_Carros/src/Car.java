@@ -9,21 +9,20 @@ public class Car {
     private Image image;
     private boolean isLeft;
     private final int speed = 5;
-    private int identifier;
+    private String identifier;
     private int crossingTime;
+    @SuppressWarnings("unused")
     private int waitingTime;
-    private Interface instance;
+    private CarManager instance;
 
-    public Car(int x, int y, int identifier, int crossingTime, int waitingTime, Interface instance, boolean isLeft) {
+
+    public Car(int x, int y, String identifier, int crossingTime, int waitingTime, boolean isLeft) {
         this.x = x;
         this.y = y;
         this.isLeft = isLeft;
         this.identifier = identifier;
         this.crossingTime = crossingTime;
         this.waitingTime = waitingTime;
-        this.instance = instance;
-
-        
 
         try {
             if (isLeft) {
