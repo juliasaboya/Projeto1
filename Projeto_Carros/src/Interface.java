@@ -6,13 +6,14 @@ import javax.swing.*;
 
 public class Interface extends JFrame {
     private RoadPanel roadPanel;
+    
     public JTextArea logTextArea;
     public ArrayList<Car> leftCars = new ArrayList<>();
     public ArrayList<Car> rightCars = new ArrayList<>();
+    private CarManager manage = new CarManager(roadPanel, leftCars, rightCars);
     public final int maxCars = 10;
     private Timer timer;
     final int sizeX = 1200, sizeY = 1000;
-    public int[] identifierVerification;
     int i;
 
     public Interface() {
@@ -36,7 +37,7 @@ public class Interface extends JFrame {
         JScrollPane scrollPane = new JScrollPane(logTextArea);
         
         leftButton.addActionListener(new ActionListener() {
-            CarManager manage = new CarManager(roadPanel, leftCars, rightCars);
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(idField.getText());
@@ -48,14 +49,12 @@ public class Interface extends JFrame {
         );
         
         rightButton.addActionListener(new ActionListener() {
-            CarManager manage = new CarManager(roadPanel, leftCars, rightCars);
             @Override
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(idField.getText());
                 int crossingTime = Integer.parseInt(crossingTimeField.getText());
                 int waitingTime = Integer.parseInt(waitingTimeField.getText());
                 manage.createCar(false, id, crossingTime, waitingTime);
-                addToLog("Carro "+id+" criado a direita");
 
             }
         });
@@ -93,8 +92,6 @@ public class Interface extends JFrame {
             carSimulation.setVisible(true);
         });
     }
-    public void addToLog(String message){
-        logTextArea.append(message + "\n");
-    }
+    
 }
 
